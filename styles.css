@@ -23,6 +23,27 @@
 	box-shadow: 0 0 0 4px rgba(31, 111, 235, 0.25);
 }
 
+#itemsContainer input {
+	width: 100%;
+	border: 1px solid #30363d !important;
+	background: #0d1117 !important;
+	color: #c9d1d9 !important;
+	border-radius: 0.75rem;
+	padding: 0.75rem 1rem;
+	font-size: 1rem;
+	outline: none;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+#itemsContainer input::placeholder {
+	color: #8b949e !important;
+}
+
+#itemsContainer input:focus {
+	border-color: #1f6feb !important;
+	box-shadow: 0 0 0 4px rgba(31, 111, 235, 0.25) !important;
+}
+
 :where(.ui-wheel-of-fortune) {
 	--_items: 12;
 	all: unset;
@@ -33,6 +54,12 @@
 	position: relative;
 	width: 100%;
 	user-select: none;
+	touch-action: none;
+	cursor: grab;
+}
+
+:where(.ui-wheel-of-fortune).is-dragging {
+	cursor: grabbing;
 }
 
 :where(.ui-wheel-of-fortune)::after {
