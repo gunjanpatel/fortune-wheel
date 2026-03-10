@@ -49,7 +49,7 @@ function addItem(value = "") {
     input.type = "text";
     input.value = value;
     input.placeholder = "Enter item";
-    input.className = "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-200";
+    input.className = "w-full rounded-xl border border-slate-600 bg-slate-900/85 px-4 py-3 text-base text-slate-100 placeholder:text-slate-400 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-500/25";
     itemsContainer.appendChild(input);
     return input;
 }
