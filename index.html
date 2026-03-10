@@ -14,6 +14,18 @@
 <section id="setupScreen" class="w-full max-w-2xl rounded-3xl bg-[#161b22]/95 p-5 md:p-8 shadow-[0_28px_60px_rgba(1,4,9,0.7),0_2px_8px_rgba(1,4,9,0.45)] ring-1 ring-[#30363d]">
   <h1 class="mb-4 text-center text-3xl font-bold tracking-tight">Create Your Wheel</h1>
 
+  <div class="mb-4 grid gap-2 sm:grid-cols-[1fr_auto]">
+    <select id="presetSelect" class="w-full rounded-xl border border-[#30363d] bg-[#0d1117] px-3 py-2 text-[#c9d1d9] outline-none focus:border-[#1f6feb] focus:ring-4 focus:ring-[#1f6feb]/25">
+      <option value="">Choose a preset (optional)</option>
+      <option value="birthday-questions">Birthday Party Questionnaire</option>
+      <option value="kids-play">Kids Playing Challenges</option>
+      <option value="icebreaker-questions">Fun Icebreaker Questions</option>
+    </select>
+    <button id="applyPresetBtn" class="rounded-full bg-[#8957e5] px-5 py-2.5 text-white font-semibold hover:bg-[#a371f7]" type="button">
+      Apply Preset
+    </button>
+  </div>
+
   <div id="itemsContainer" class="grid gap-2.5 mb-4"></div>
 
   <div class="mb-3 flex flex-col gap-2 sm:flex-row">
@@ -54,7 +66,7 @@
 
 <audio id="tickSound" src="tick.mp3"></audio>
 
-<script src="app.js?v=20260310"></script>
-<script src="wheel.js?v=20260310"></script>
+<script src="app.js?v=20260310-2"></script>
+<script src="wheel.js?v=20260310-2"></script>
 </body>
 </html>

@@ -87,11 +87,11 @@
 	border-radius: 50%;
 	color: #c9d1d9;
 	cursor: pointer;
-	font-size: clamp(20px, 4.2vmin, 42px);
+	font-size: clamp(16px, 3.2vmin, 32px);
 	font-size: 4.4cqi;
 	font-weight: 500;
 	place-self: center;
-	width: clamp(84px, 18vmin, 130px);
+	width: clamp(64px, 14vmin, 100px);
 	width: 20cqi;
 	line-height: 1;
 	letter-spacing: 0.01em;
