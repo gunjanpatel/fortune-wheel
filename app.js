@@ -49,7 +49,7 @@ function addItem(value = "") {
     input.type = "text";
     input.value = value;
     input.placeholder = "Enter item";
-    input.className = "wheel-item-input";
+    input.className = "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-200";
     itemsContainer.appendChild(input);
     return input;
 }

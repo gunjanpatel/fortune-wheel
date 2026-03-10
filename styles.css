@@ -1,156 +1,5 @@
-* {
-	box-sizing: border-box;
-}
-
 :root {
-	--page-bg: #d9d9de;
-	--panel-bg: #ffffff;
-	--ink: #161616;
-	--muted: #545a66;
 	--ring: rgba(255, 255, 255, 0.55);
-}
-
-body {
-	margin: 0;
-	min-height: 100dvh;
-	font-family: "Avenir Next", "Segoe UI", sans-serif;
-	color: var(--ink);
-	background:
-		radial-gradient(65vmax 55vmax at 12% 10%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 58%),
-		radial-gradient(55vmax 45vmax at 90% 95%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 64%),
-		var(--page-bg);
-	display: grid;
-	place-items: center;
-	padding: clamp(16px, 3.5vw, 32px);
-}
-
-.hidden {
-	display: none !important;
-}
-
-.panel {
-	width: min(680px, 100%);
-	border-radius: 20px;
-	background: var(--panel-bg);
-	padding: clamp(18px, 3.5vw, 34px);
-	box-shadow:
-		0 26px 50px rgba(20, 24, 32, 0.13),
-		0 2px 6px rgba(20, 24, 32, 0.08);
-}
-
-.setup-screen h1 {
-	margin: 0 0 18px;
-	text-align: center;
-	letter-spacing: 0.01em;
-	font-size: clamp(1.4rem, 2.3vw, 2.1rem);
-}
-
-.items-container {
-	display: grid;
-	gap: 10px;
-	margin-bottom: 16px;
-}
-
-.setup-actions {
-	display: flex;
-	gap: 10px;
-	margin-bottom: 12px;
-}
-
-.bulk-entry {
-	border: 1px solid #cfd4de;
-	border-radius: 12px;
-	padding: 12px;
-	background: #f8fafc;
-	margin-bottom: 14px;
-}
-
-.bulk-entry textarea {
-	width: 100%;
-	font: inherit;
-	border: 1px solid #bfc5d1;
-	border-radius: 10px;
-	padding: 10px 12px;
-	resize: vertical;
-	min-height: 110px;
-	outline: 0;
-	background: #fff;
-}
-
-.bulk-entry textarea:focus {
-	border-color: #3f7fd4;
-	box-shadow: 0 0 0 3px rgba(63, 127, 212, 0.2);
-}
-
-.bulk-actions {
-	display: flex;
-	gap: 10px;
-	margin-top: 10px;
-}
-
-.items-container input {
-	width: 100%;
-	font: inherit;
-	border: 1px solid #bfc5d1;
-	border-radius: 10px;
-	padding: 12px 14px;
-	outline: 0;
-	transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.items-container input:focus {
-	border-color: #3f7fd4;
-	box-shadow: 0 0 0 3px rgba(63, 127, 212, 0.2);
-}
-
-.btn {
-	appearance: none;
-	border: 0;
-	border-radius: 999px;
-	padding: 10px 18px;
-	font: inherit;
-	font-weight: 700;
-	cursor: pointer;
-	transition: transform 0.12s ease, filter 0.15s ease;
-}
-
-.btn:hover {
-	filter: brightness(1.03);
-}
-
-.btn:active {
-	transform: translateY(1px);
-}
-
-.btn-primary {
-	background: #1f7a32;
-	color: #fff;
-}
-
-.btn-secondary {
-	background: #1773b8;
-	color: #fff;
-}
-
-.btn-neutral {
-	margin-top: 16px;
-	background: #3c4658;
-	color: #fff;
-}
-
-.right {
-	float: right;
-}
-
-.wheel-screen {
-	width: min(800px, 100%);
-	display: grid;
-	place-items: center;
-	justify-items: center;
-}
-
-.wheel-shell {
-	width: min(78vmin, 640px);
 }
 
 :where(.ui-wheel-of-fortune) {
@@ -170,6 +19,7 @@ body {
 	background-color: crimson;
 	clip-path: polygon(50% 100%, 100% 0, 0 0);
 	content: "";
+	height: clamp(14px, 2.7vmin, 26px);
 	height: 4cqi;
 	position: absolute;
 	place-self: start center;
@@ -189,13 +39,28 @@ body {
 	border-radius: 50%;
 	color: #171b22;
 	cursor: pointer;
+	font-size: clamp(20px, 4.2vmin, 42px);
 	font-size: 4.4cqi;
 	font-weight: 500;
 	place-self: center;
+	width: clamp(84px, 18vmin, 130px);
 	width: 20cqi;
+	line-height: 1;
 	letter-spacing: 0.01em;
 	z-index: 6;
 	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+}
+
+#fortuneWheel > #spinBtn {
+	display: grid;
+	place-items: center;
+	background-color: rgba(244, 244, 244, 0.82);
+	backdrop-filter: blur(1px);
+	-webkit-backdrop-filter: blur(1px);
+	border-radius: 9999px;
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.35) inset,
+		0 0 0 1px rgba(148, 163, 184, 0.28);
 }
 
 :where(.ui-wheel-of-fortune) > button:disabled {
@@ -228,6 +93,7 @@ body {
 	);
 	clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
 	display: grid;
+	font-size: clamp(18px, 3.5vmin, 40px);
 	font-size: 4.7cqi;
 	font-weight: 500;
 	grid-area: 1 / -1;
@@ -237,24 +103,4 @@ body {
 	width: 50cqi;
 	color: #101820;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
-}
-
-@media (max-width: 640px) {
-	.setup-actions,
-	.bulk-actions {
-		flex-direction: column;
-	}
-
-	.btn {
-		width: 100%;
-		margin-top: 8px;
-	}
-
-	.right {
-		float: none;
-	}
-
-	.wheel-shell {
-		width: min(95vmin, 640px);
-	}
 }
