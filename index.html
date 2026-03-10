@@ -1,68 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fortune Wheel</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fortune Wheel</title>
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    canvas { touch-action: none; }
-  </style>
+<style>
+  canvas { touch-action: none; }
+  #pointer {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid #d10000;
+    filter: drop-shadow(0 0 3px #000);
+  }
+</style>
 </head>
 
 <body class="bg-gray-100">
 
-  <!-- SETUP SCREEN -->
-  <div id="setupScreen" class="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
-    <h1 class="text-2xl font-bold mb-4">Create Your Spinning Wheel</h1>
+<!-- SETUP SCREEN -->
+<div id="setupScreen" class="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded">
+  <h1 class="text-2xl font-bold mb-4 text-center">Create Your Wheel</h1>
 
-    <div id="itemsContainer" class="space-y-2 mb-4"></div>
+  <div id="itemsContainer" class="space-y-2 mb-4"></div>
 
-    <button id="addItemBtn"
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-      Add Item
-    </button>
+  <button id="addItemBtn"
+    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+    Add Item
+  </button>
 
-    <button id="nextBtn"
-      class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 float-right">
-      Next →
-    </button>
-    <div class="clearfix"></div>
+  <button id="nextBtn"
+    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 float-right">
+    Next →
+  </button>
+
+  <div class="clearfix"></div>
+</div>
+
+<!-- WHEEL SCREEN -->
+<div id="wheelScreen" class="hidden flex flex-col items-center mt-10">
+  <div class="relative">
+    <canvas id="wheelCanvas" width="450" height="450"></canvas>
+
+    <div id="pointer" class="absolute top-[-25px] left-1/2 transform -translate-x-1/2"></div>
   </div>
 
-  <!-- WHEEL SCREEN -->
-  <div id="wheelScreen" class="hidden flex flex-col items-center mt-10">
-    <canvas id="wheelCanvas" width="400" height="400"></canvas>
+  <button id="spinBtn"
+    class="bg-purple-600 text-white mt-8 px-8 py-4 rounded-full text-xl hover:bg-purple-700">
+    SPIN
+  </button>
 
-    <button id="spinBtn"
-      class="bg-purple-600 text-white mt-6 px-6 py-3 rounded-full hover:bg-purple-700">
-      SPIN
-    </button>
+  <button id="startOverBtn"
+    class="bg-gray-500 text-white mt-4 px-4 py-2 rounded hover:bg-gray-600">
+    Start Over
+  </button>
+</div>
 
-    <button id="startOverBtn"
-      class="bg-gray-500 text-white mt-4 px-4 py-2 rounded hover:bg-gray-600">
-      Start Over
+<!-- WINNER MODAL -->
+<div id="winnerModal"
+     class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center">
+  <div class="bg-white p-8 rounded shadow text-center">
+    <h2 class="text-2xl font-bold mb-4">Winner!</h2>
+    <p id="winnerText" class="text-4xl font-semibold"></p>
+
+    <button id="closeModalBtn"
+      class="bg-blue-500 text-white px-6 py-3 mt-6 rounded hover:bg-blue-600">
+      OK
     </button>
   </div>
+</div>
 
-  <!-- WINNER MODAL -->
-  <div id="winnerModal"
-       class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center">
-    <div class="bg-white p-6 rounded shadow text-center">
-      <h2 class="text-xl font-bold mb-4">Winner!</h2>
-      <p id="winnerText" class="text-3xl font-semibold"></p>
+<audio id="tickSound" src="tick.mp3"></audio>
 
-      <button id="closeModalBtn"
-        class="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600">
-        OK
-      </button>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
-  <script src="wheel.js"></script>
+<script src="app.js"></script>
+<script src="wheel.js"></script>
 </body>
 </html>
