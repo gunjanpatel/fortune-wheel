@@ -1,5 +1,5 @@
 :root {
-	--ring: rgba(148, 163, 184, 0.35);
+	--ring: rgba(139, 148, 158, 0.38);
 }
 
 :where(.ui-wheel-of-fortune) {
@@ -34,10 +34,10 @@
 
 :where(.ui-wheel-of-fortune) > button {
 	aspect-ratio: 1 / 1;
-	background: hsla(222, 24%, 16%, 0.78);
+	background: rgba(22, 27, 34, 0.86);
 	border: 0;
 	border-radius: 50%;
-	color: #e2e8f0;
+	color: #c9d1d9;
 	cursor: pointer;
 	font-size: clamp(20px, 4.2vmin, 42px);
 	font-size: 4.4cqi;
@@ -48,19 +48,19 @@
 	line-height: 1;
 	letter-spacing: 0.01em;
 	z-index: 6;
-	box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.25) inset;
+	box-shadow: 0 0 0 1px rgba(139, 148, 158, 0.24) inset;
 }
 
 #fortuneWheel > #spinBtn {
 	display: grid;
 	place-items: center;
-	background-color: rgba(15, 23, 42, 0.8);
+	background-color: rgba(13, 17, 23, 0.86);
 	backdrop-filter: blur(1px);
 	-webkit-backdrop-filter: blur(1px);
 	border-radius: 9999px;
 	box-shadow:
-		0 0 0 1px rgba(148, 163, 184, 0.35) inset,
-		0 0 0 1px rgba(51, 65, 85, 0.55);
+		0 0 0 1px rgba(139, 148, 158, 0.35) inset,
+		0 0 0 1px rgba(48, 54, 61, 0.66);
 }
 
 :where(.ui-wheel-of-fortune) > button:disabled {
@@ -77,10 +77,10 @@
 	border: 0;
 	border-radius: 50%;
 	overflow: hidden;
-	background: #111827;
+	background: #0d1117;
 	box-shadow:
 		0 0 0 1px var(--ring),
-		0 16px 34px rgba(2, 6, 23, 0.55);
+		0 16px 34px rgba(1, 4, 9, 0.6);
 }
 
 :where(.ui-wheel-of-fortune) > ul > li {
