@@ -1,0 +1,218 @@
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--page-bg: #d9d9de;
+	--panel-bg: #ffffff;
+	--ink: #161616;
+	--muted: #545a66;
+	--ring: rgba(255, 255, 255, 0.55);
+}
+
+body {
+	margin: 0;
+	min-height: 100dvh;
+	font-family: "Avenir Next", "Segoe UI", sans-serif;
+	color: var(--ink);
+	background:
+		radial-gradient(65vmax 55vmax at 12% 10%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 58%),
+		radial-gradient(55vmax 45vmax at 90% 95%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 64%),
+		var(--page-bg);
+	display: grid;
+	place-items: center;
+	padding: clamp(16px, 3.5vw, 32px);
+}
+
+.hidden {
+	display: none !important;
+}
+
+.panel {
+	width: min(680px, 100%);
+	border-radius: 20px;
+	background: var(--panel-bg);
+	padding: clamp(18px, 3.5vw, 34px);
+	box-shadow:
+		0 26px 50px rgba(20, 24, 32, 0.13),
+		0 2px 6px rgba(20, 24, 32, 0.08);
+}
+
+.setup-screen h1 {
+	margin: 0 0 18px;
+	text-align: center;
+	letter-spacing: 0.01em;
+	font-size: clamp(1.4rem, 2.3vw, 2.1rem);
+}
+
+.items-container {
+	display: grid;
+	gap: 10px;
+	margin-bottom: 16px;
+}
+
+.items-container input {
+	width: 100%;
+	font: inherit;
+	border: 1px solid #bfc5d1;
+	border-radius: 10px;
+	padding: 12px 14px;
+	outline: 0;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.items-container input:focus {
+	border-color: #3f7fd4;
+	box-shadow: 0 0 0 3px rgba(63, 127, 212, 0.2);
+}
+
+.btn {
+	appearance: none;
+	border: 0;
+	border-radius: 999px;
+	padding: 10px 18px;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform 0.12s ease, filter 0.15s ease;
+}
+
+.btn:hover {
+	filter: brightness(1.03);
+}
+
+.btn:active {
+	transform: translateY(1px);
+}
+
+.btn-primary {
+	background: #1f7a32;
+	color: #fff;
+}
+
+.btn-secondary {
+	background: #1773b8;
+	color: #fff;
+}
+
+.btn-neutral {
+	margin-top: 16px;
+	background: #3c4658;
+	color: #fff;
+}
+
+.right {
+	float: right;
+}
+
+.wheel-screen {
+	width: min(800px, 100%);
+	display: grid;
+	place-items: center;
+	justify-items: center;
+}
+
+.wheel-shell {
+	width: min(78vmin, 640px);
+}
+
+:where(.ui-wheel-of-fortune) {
+	--_items: 12;
+	all: unset;
+	aspect-ratio: 1 / 1;
+	container-type: inline-size;
+	direction: ltr;
+	display: grid;
+	position: relative;
+	width: 100%;
+	user-select: none;
+}
+
+:where(.ui-wheel-of-fortune)::after {
+	aspect-ratio: 1 / cos(30deg);
+	background-color: crimson;
+	clip-path: polygon(50% 100%, 100% 0, 0 0);
+	content: "";
+	height: 4cqi;
+	position: absolute;
+	place-self: start center;
+	scale: 1.4;
+	z-index: 5;
+	transform: translateY(-8%);
+}
+
+:where(.ui-wheel-of-fortune) > * {
+	position: absolute;
+}
+
+:where(.ui-wheel-of-fortune) > button {
+	aspect-ratio: 1 / 1;
+	background: hsla(0, 0%, 94%, 0.72);
+	border: 0;
+	border-radius: 50%;
+	color: #171b22;
+	cursor: pointer;
+	font-size: 4.4cqi;
+	font-weight: 500;
+	place-self: center;
+	width: 20cqi;
+	letter-spacing: 0.01em;
+	z-index: 6;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+}
+
+:where(.ui-wheel-of-fortune) > button:disabled {
+	opacity: 0.8;
+	cursor: not-allowed;
+}
+
+:where(.ui-wheel-of-fortune) > ul {
+	all: unset;
+	clip-path: inset(0 0 0 0 round 50%);
+	display: grid;
+	inset: 0;
+	place-content: center start;
+	border: 0;
+	border-radius: 50%;
+	overflow: hidden;
+	background: #eef1f3;
+	box-shadow:
+		0 0 0 1px var(--ring),
+		0 12px 30px rgba(22, 28, 36, 0.12);
+}
+
+:where(.ui-wheel-of-fortune) > ul > li {
+	align-content: center;
+	aspect-ratio: 1 / calc(2 * tan(180deg / var(--_items)));
+	background: linear-gradient(
+		90deg,
+		hsl(calc(360deg / var(--_items) * var(--_idx)), 72%, 74%),
+		hsl(calc(360deg / var(--_items) * var(--_idx)), 68%, 66%)
+	);
+	clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+	display: grid;
+	font-size: 4.7cqi;
+	font-weight: 500;
+	grid-area: 1 / -1;
+	padding-left: 1ch;
+	rotate: calc(360deg / var(--_items) * (var(--_idx) - 1));
+	transform-origin: center right;
+	width: 50cqi;
+	color: #101820;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+@media (max-width: 640px) {
+	.btn {
+		width: 100%;
+		margin-top: 8px;
+	}
+
+	.right {
+		float: none;
+	}
+
+	.wheel-shell {
+		width: min(95vmin, 640px);
+	}
+}

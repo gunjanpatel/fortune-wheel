@@ -16,7 +16,7 @@ function addItem(value = "") {
     input.type = "text";
     input.value = value;
     input.placeholder = "Enter item";
-    input.className = "w-full border px-3 py-2 rounded";
+    input.className = "wheel-item-input";
     itemsContainer.appendChild(input);
 }
 
@@ -27,7 +27,7 @@ nextBtn.onclick = () => {
         .map(x => x.value.trim())
         .filter(Boolean);
 
-    if (items.length < 2) return alert("Enter at least 2 items.");
+    if (items.length < 3) return alert("Enter at least 3 items.");
 
     localStorage.setItem("wheelItems", JSON.stringify(items));
 

@@ -1,114 +1,135 @@
-const canvas = document.getElementById("wheelCanvas");
-const ctx = canvas.getContext("2d");
+const wheelRoot = document.getElementById("fortuneWheel");
+const wheelList = document.getElementById("wheelItems");
 const spinBtn = document.getElementById("spinBtn");
 const tickSound = document.getElementById("tickSound");
-const winnerModal = document.getElementById("winnerModal");
-const winnerText = document.getElementById("winnerText");
-const closeModalBtn = document.getElementById("closeModalBtn");
 
 let items = [];
-let colors = [];
-let angle = 0;
-let velocity = 0;
-let arc = 0;
 let spinning = false;
+let spinAnimation = null;
+let previousEndDegree = 0;
+let tickRaf = null;
 let lastTickIndex = -1;
 
-function bright() {
-    const r = 150 + Math.random() * 100;
-    const g = 150 + Math.random() * 100;
-    const b = 150 + Math.random() * 100;
-    return `rgb(${r},${g},${b})`;
+function normalizeDegrees(value) {
+    return ((value % 360) + 360) % 360;
 }
 
-function initWheel(list) {
-    items = list;
-    arc = (2 * Math.PI) / items.length;
-    colors = items.map(() => bright());
-    drawWheel();
+function indexFromDegree(degree) {
+    if (!items.length) return 0;
+    const normalized = normalizeDegrees(degree);
+    const adjusted = (360 - normalized) % 360;
+    const segment = 360 / items.length;
+    return Math.floor(adjusted / segment) % items.length;
 }
 
-function drawWheel() {
-    const radius = canvas.width / 2;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function getRenderedRotationDeg() {
+    const transform = getComputedStyle(wheelList).transform;
+    if (!transform || transform === "none") {
+        return previousEndDegree;
+    }
 
-    items.forEach((item, i) => {
-        const start = angle + i * arc;
+    const matrix = new DOMMatrixReadOnly(transform);
+    return (Math.atan2(matrix.b, matrix.a) * 180) / Math.PI;
+}
 
-        const grad = ctx.createRadialGradient(
-            radius, radius, radius * 0.2,
-            radius, radius, radius
-        );
-        grad.addColorStop(0, "#fff");
-        grad.addColorStop(1, colors[i]);
-
-        ctx.beginPath();
-        ctx.moveTo(radius, radius);
-        ctx.fillStyle = grad;
-        ctx.arc(radius, radius, radius, start, start + arc);
-        ctx.fill();
-
-        ctx.save();
-        ctx.translate(radius, radius);
-        ctx.rotate(start + arc / 2);
-        ctx.fillStyle = "#000";
-        ctx.font = "20px sans-serif";
-        ctx.textAlign = "right";
-        ctx.fillText(item, radius - 20, 8);
-        ctx.restore();
+function playTick() {
+    if (!tickSound) return;
+    tickSound.currentTime = 0;
+    tickSound.play().catch(() => {
+        // Ignore autoplay restrictions; interaction is user-driven.
     });
-
-    // Outer ring
-    ctx.beginPath();
-    ctx.arc(radius, radius, radius, 0, 2 * Math.PI);
-    ctx.lineWidth = 8;
-    ctx.strokeStyle = "#333";
-    ctx.stroke();
 }
 
-function physicsStep() {
+function monitorTicks() {
     if (!spinning) return;
 
-    angle += velocity;
-    velocity *= 0.985;
-
-    const currentIndex = Math.floor(((2 * Math.PI - (angle % (2 * Math.PI))) % (2 * Math.PI)) / arc);
-
+    const currentIndex = indexFromDegree(getRenderedRotationDeg());
     if (currentIndex !== lastTickIndex) {
-        tickSound.currentTime = 0;
-        tickSound.play();
+        playTick();
         lastTickIndex = currentIndex;
     }
 
-    drawWheel();
+    tickRaf = requestAnimationFrame(monitorTicks);
+}
 
-    if (Math.abs(velocity) < 0.002) {
-        spinning = false;
-        finalizeWinner();
-        return;
+function initWheel(list) {
+    items = list.slice();
+    wheelRoot.style.setProperty("--_items", items.length);
+    wheelList.innerHTML = "";
+
+    items.forEach((item, i) => {
+        const li = document.createElement("li");
+        li.style.setProperty("--_idx", i + 1);
+        li.textContent = item;
+        wheelList.appendChild(li);
+    });
+
+    if (spinAnimation) {
+        spinAnimation.cancel();
+        spinAnimation = null;
     }
 
-    requestAnimationFrame(physicsStep);
+    if (tickRaf) {
+        cancelAnimationFrame(tickRaf);
+        tickRaf = null;
+    }
+
+    spinning = false;
+    previousEndDegree = 0;
+    lastTickIndex = -1;
+    wheelList.style.transform = "rotate(0deg)";
+    spinBtn.disabled = false;
 }
 
 function spin() {
-    if (spinning) return;
+    if (spinning || items.length < 2) return;
 
     spinning = true;
-    velocity = 0.25 + Math.random() * 0.25;
-    physicsStep();
-}
+    spinBtn.disabled = true;
+    lastTickIndex = indexFromDegree(previousEndDegree);
 
-function finalizeWinner() {
-    const norm = (angle % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-    const index = Math.floor(((2 * Math.PI - norm) % (2 * Math.PI)) / arc);
+    if (spinAnimation) {
+        spinAnimation.cancel();
+    }
 
-    winnerText.textContent = items[index];
-    winnerModal.classList.remove("hidden");
+    const spinDegrees = 1800 + Math.random() * 1440;
+    const newEndDegree = previousEndDegree + spinDegrees;
+
+    spinAnimation = wheelList.animate(
+        [
+            { transform: `rotate(${previousEndDegree}deg)` },
+            { transform: `rotate(${newEndDegree}deg)` }
+        ],
+        {
+            duration: 4200,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "forwards",
+            iterations: 1
+        }
+    );
+
+    monitorTicks();
+
+    spinAnimation.onfinish = () => {
+        if (tickRaf) {
+            cancelAnimationFrame(tickRaf);
+            tickRaf = null;
+        }
+
+        spinning = false;
+        previousEndDegree = newEndDegree;
+        spinBtn.disabled = false;
+    };
+
+    spinAnimation.oncancel = () => {
+        if (tickRaf) {
+            cancelAnimationFrame(tickRaf);
+            tickRaf = null;
+        }
+
+        spinning = false;
+        spinBtn.disabled = false;
+    };
 }
 
 spinBtn.onclick = spin;
-closeModalBtn.onclick = () => winnerModal.classList.add("hidden");
-
-// SWIPE (mobile)
-let startY = null;
