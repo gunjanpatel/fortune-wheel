@@ -18,9 +18,24 @@ function addItem(value = "") {
     input.placeholder = "Enter item";
     input.className = "wheel-item-input";
     itemsContainer.appendChild(input);
+    return input;
 }
 
-addItemBtn.onclick = () => addItem("");
+addItemBtn.onclick = () => {
+    const input = addItem("");
+    input.focus();
+};
+
+itemsContainer.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement)) return;
+
+    event.preventDefault();
+    const input = addItem("");
+    input.focus();
+});
 
 nextBtn.onclick = () => {
     const items = [...itemsContainer.querySelectorAll("input")]
