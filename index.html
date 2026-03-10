@@ -15,9 +15,22 @@
 
   <div id="itemsContainer" class="items-container"></div>
 
-  <button id="addItemBtn" class="btn btn-secondary">
-    Add Item
-  </button>
+  <div class="setup-actions">
+    <button id="addItemBtn" class="btn btn-secondary" type="button">
+      Add One
+    </button>
+
+    <button id="toggleBulkBtn" class="btn btn-secondary" type="button">
+      Bulk Paste
+    </button>
+  </div>
+
+  <div id="bulkEntryPanel" class="bulk-entry hidden">
+    <textarea id="bulkItemsInput" rows="6" placeholder="One item per line"></textarea>
+    <div class="bulk-actions">
+      <button id="cancelBulkBtn" class="btn btn-neutral" type="button">Close</button>
+    </div>
+  </div>
 
   <button id="nextBtn" class="btn btn-primary right">
     Next →
