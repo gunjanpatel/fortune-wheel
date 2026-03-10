@@ -87,9 +87,10 @@
 	align-content: center;
 	aspect-ratio: 1 / calc(2 * tan(180deg / var(--_items)));
 	background: linear-gradient(
-		90deg,
-		hsl(calc(360deg / var(--_items) * var(--_idx)), 72%, 74%),
-		hsl(calc(360deg / var(--_items) * var(--_idx)), 68%, 66%)
+		120deg,
+		hsl(calc(360deg / var(--_items) * var(--_idx) - 18deg), 78%, 82%) 0%,
+		hsl(calc(360deg / var(--_items) * var(--_idx)), 73%, 72%) 52%,
+		hsl(calc(360deg / var(--_items) * var(--_idx) + 22deg), 67%, 60%) 100%
 	);
 	clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
 	display: grid;
