@@ -65,15 +65,16 @@
 :where(.ui-wheel-of-fortune)::after {
 	aspect-ratio: 1 / cos(30deg);
 	background-color: crimson;
-	clip-path: polygon(50% 100%, 100% 0, 0 0);
+	clip-path: polygon(0 0, 100% 50%, 0 100%);
 	content: "";
 	height: clamp(14px, 2.7vmin, 26px);
 	height: 4cqi;
 	position: absolute;
-	place-self: start center;
+	place-self: center start;
 	scale: 1.4;
 	z-index: 5;
-	transform: translateY(-8%);
+	transform: translateY(0%);
+    margin-left: -0.8em;
 }
 
 :where(.ui-wheel-of-fortune) > * {
@@ -88,11 +89,11 @@
 	color: #c9d1d9;
 	cursor: pointer;
 	font-size: clamp(16px, 3.2vmin, 32px);
-	font-size: 4.4cqi;
+	font-size: 2.8cqi;
 	font-weight: 500;
 	place-self: center;
 	width: clamp(64px, 14vmin, 100px);
-	width: 20cqi;
+	width: 8cqi;
 	line-height: 1;
 	letter-spacing: 0.01em;
 	z-index: 6;
@@ -142,11 +143,11 @@
 	);
 	clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
 	display: grid;
-	font-size: clamp(18px, 3.5vmin, 40px);
-	font-size: 4.7cqi;
-	font-weight: 500;
+	font-size: clamp(0.5em, 1.5vmin, 1em)
+	font-size: 2.8cqi;
+	font-weight: 501;
 	grid-area: 1 / -1;
-	padding-left: 1ch;
+	padding-left: 3ch;
 	rotate: calc(360deg / var(--_items) * (var(--_idx) - 1));
 	transform-origin: center right;
 	width: 50cqi;
