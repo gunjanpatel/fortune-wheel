@@ -39,7 +39,6 @@ function getRenderedRotationDeg() {
 
 function playTick() {
     if (!tickSound) return;
-    tickSound.currentTime = 0;
     tickSound.play().catch(() => {
         // Ignore autoplay restrictions; interaction is user-driven.
     });
