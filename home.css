@@ -60,6 +60,12 @@ body.theme-memory {
   --brand-soft: rgba(217, 70, 239, 0.15);
 }
 
+body.theme-gujarati {
+  --brand: #f97316;
+  --brand-hover: #fb923c;
+  --brand-soft: rgba(249, 115, 22, 0.15);
+}
+
 html {
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -282,6 +288,14 @@ a.game-card:hover .game-card__glow { opacity: 1; }
   background: radial-gradient(ellipse at top left, rgba(217, 70, 239, 0.12) 0%, transparent 70%);
 }
 .game-card--memory .game-card__arrow { color: #d946ef; }
+
+/* Gujarati card — saffron orange glow */
+.game-card--gujarati { border-color: rgba(249, 115, 22, 0.25); }
+.game-card--gujarati:hover { border-color: rgba(249, 115, 22, 0.55); }
+.game-card--gujarati .game-card__glow {
+  background: radial-gradient(ellipse at top left, rgba(249, 115, 22, 0.12) 0%, transparent 70%);
+}
+.game-card--gujarati .game-card__arrow { color: #f97316; }
 
 /* Soon card */
 .game-card--soon {
