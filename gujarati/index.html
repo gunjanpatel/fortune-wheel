@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Gujarati Hub — Kakko & Barakhadi Trainer</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-gujarati">
+  <div class="layout-wrapper flex flex-col min-h-screen">
+    
+    <!-- ─── Header ─── -->
+    <header class="fixed top-0 left-0 right-0 z-50 h-14 flex items-center">
+      <div class="max-w-4xl mx-auto w-full px-5 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5 group text-decoration-none">
+          <img src="https://gravatar.com/avatar/a71d5c71e4c2236145ec0b8058bf9508?s=400" alt="Gunjan Patel"
+            class="w-7 h-7 rounded-full object-cover border border-[rgba(255,255,255,0.1)]" />
+          <span class="font-semibold text-sm text-[#f2f2f7]">Gunjan Patel</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-7">
+          <a href="https://gunjanpatel.info/about" class="nav-link">About</a>
+          <a href="https://gunjanpatel.info/blog" class="nav-link">Blog</a>
+          <a href="https://gunjanpatel.info/yoga" class="nav-link">Yoga</a>
+          <div class="nav-dropdown">
+            <button class="nav-link nav-dropdown-btn" type="button">Things I Built ▾</button>
+            <div class="nav-dropdown-menu">
+              <a href="https://learn.gunjanpatel.info">Learn</a>
+              <a href="https://shop.gunjanpatel.info">Patel Flours</a>
+            </div>
+          </div>
+          <a href="https://games.gunjanpatel.info" class="nav-link">🎮 Games</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <a href="https://github.com/gunjanpatel" target="_blank"
+            class="text-[rgba(235,235,245,0.50)] hover:text-[#f97316] transition-colors" title="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── Main Content ─── -->
+    <main class="flex-1 pt-20 pb-12 px-5 flex flex-col items-center">
+
+      <!-- MENU SCREEN -->
+      <section id="menuScreen" class="w-full max-w-4xl mt-6">
+        <div class="text-center mb-10">
+          <div class="text-6xl mb-3">🦁</div>
+          <h1 class="page-title text-4xl">Gujarati Hub</h1>
+          <p class="text-sm text-[rgba(235,235,245,0.50)] mt-2">Fun, interactive brain-training games to master Kakko & Barakhadi!</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Card A: Kakko Connector -->
+          <div class="game-selector-card glass-panel p-6 flex flex-col justify-between">
+            <div>
+              <div class="text-4xl mb-3">🧩</div>
+              <h3 class="text-xl font-bold text-white mb-2">Kakko Connector</h3>
+              <p class="text-sm text-[rgba(235,235,245,0.6)] mb-4">Connect Gujarati letters in alphabetical order! Look out for trap letters!</p>
+              <div class="text-xs text-[rgba(235,235,245,0.4)] font-mono">Best Score: <span id="bestConnector">--</span></div>
+            </div>
+            <button onclick="launchMode('connector')" class="btn-primary mt-6 w-full justify-center">Play Connector</button>
+          </div>
+
+          <!-- Card B: Barakhadi Blaster -->
+          <div class="game-selector-card glass-panel p-6 flex flex-col justify-between">
+            <div>
+              <div class="text-4xl mb-3">☄️</div>
+              <h3 class="text-xl font-bold text-white mb-2">Barakhadi Blaster</h3>
+              <p class="text-sm text-[rgba(235,235,245,0.6)] mb-4">Solve equations! Match Vowel signs to create syllables, or pop root components!</p>
+              <div class="text-xs text-[rgba(235,235,245,0.4)] font-mono">Best Score: <span id="bestBlaster">--</span></div>
+            </div>
+            <button onclick="launchMode('blaster')" class="btn-primary mt-6 w-full justify-center">Play Blaster</button>
+          </div>
+
+          <!-- Card C: Audio Cipher -->
+          <div class="game-selector-card glass-panel p-6 flex flex-col justify-between">
+            <div>
+              <div class="text-4xl mb-3">👂</div>
+              <h3 class="text-xl font-bold text-white mb-2">Audio Cipher</h3>
+              <p class="text-sm text-[rgba(235,235,245,0.6)] mb-4">Flipped cards speak character sounds aloud. Match the voice to the written letter!</p>
+              <div class="text-xs text-[rgba(235,235,245,0.4)] font-mono">Best Time: <span id="bestCipher">--</span></div>
+            </div>
+            <button onclick="launchMode('cipher')" class="btn-primary mt-6 w-full justify-center">Play Cipher</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODE A: KAKKO CONNECTOR VIEW -->
+      <section id="connectorView" class="hidden w-full max-w-lg mt-6">
+        <div class="glass-panel p-6 mb-5">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-sm font-semibold text-[rgba(235,235,245,0.6)] uppercase tracking-wider">Mode: Kakko Connector</span>
+            <div class="flex gap-4">
+              <span class="text-sm font-mono text-white">Target: <span id="connectorTarget" class="font-bold text-[#f97316]">ક → ખ → ગ</span></span>
+              <span class="text-sm font-mono text-white">Steps: <span id="connectorStep">0/4</span></span>
+            </div>
+          </div>
+          <p class="text-xs text-[rgba(235,235,245,0.5)] mb-4">Click and drag nodes or click them in exact sequence! Stay away from decoy letters!</p>
+          
+          <!-- Pathfinding Grid -->
+          <div class="grid grid-cols-4 gap-4 aspect-square w-full" id="connectorGrid">
+            <!-- Grid tiles populated via JS -->
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <button onclick="exitToMenu()" class="btn-secondary flex-1 justify-center">Exit Menu</button>
+          <button onclick="initConnector()" class="btn-primary flex-1 justify-center">Reset Path</button>
+        </div>
+      </section>
+
+      <!-- MODE B: BARAKHADI BLASTER VIEW -->
+      <section id="blasterView" class="hidden w-full max-w-2xl mt-4">
+        <div class="glass-panel p-6 mb-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm font-semibold text-[rgba(235,235,245,0.6)] uppercase tracking-wider">Mode: Barakhadi Blaster</span>
+            <div class="flex gap-6">
+              <span class="text-sm font-mono text-white">Score: <span id="blasterScore" class="font-bold">0</span></span>
+              <span class="text-sm font-mono text-white">Time: <span id="blasterTimer" class="font-bold">30s</span></span>
+            </div>
+          </div>
+          
+          <!-- Target Display Panel -->
+          <div class="bg-black/50 border border-[rgba(255,255,255,0.06)] rounded-xl py-4 px-6 text-center mb-4">
+            <div class="text-xs text-[rgba(235,235,245,0.4)] uppercase tracking-wider mb-1">Pop the bubble matching:</div>
+            <div class="text-3xl font-extrabold text-[#f97316]" id="blasterTargetFormula">ક + ા = ?</div>
+          </div>
+
+          <!-- Kinetic Canvas -->
+          <div class="relative w-full aspect-[4/3] bg-black/60 border border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden cursor-pointer">
+            <canvas id="blasterCanvas" class="absolute inset-0 w-full h-full"></canvas>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <button onclick="exitToMenu()" class="btn-secondary flex-1 justify-center">Exit Menu</button>
+          <button onclick="initBlaster()" class="btn-primary flex-1 justify-center" id="blasterStartBtn">Start Blaster</button>
+        </div>
+      </section>
+
+      <!-- MODE C: AUDIO CIPHER VIEW -->
+      <section id="cipherView" class="hidden w-full max-w-lg mt-6">
+        <div class="glass-panel p-6 mb-5">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-sm font-semibold text-[rgba(235,235,245,0.6)] uppercase tracking-wider">Mode: Audio Cipher</span>
+            <div class="flex gap-4">
+              <span class="text-sm font-mono text-white">Turns: <span id="cipherFlips">0</span></span>
+              <span class="text-sm font-mono text-white">Time: <span id="cipherTime">0s</span></span>
+            </div>
+          </div>
+          <p class="text-xs text-[rgba(235,235,245,0.5)] mb-4 font-sans">Flip a card to hear its phonic pronunciation. Then find the card writing the matching Gujarati character!</p>
+          
+          <!-- Grid -->
+          <div class="grid grid-cols-4 gap-3 aspect-square w-full" id="cipherGrid">
+            <!-- Cipher cards loaded via JS -->
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <button onclick="exitToMenu()" class="btn-secondary flex-1 justify-center">Exit Menu</button>
+          <button onclick="initCipher()" class="btn-primary flex-1 justify-center">Restart Match</button>
+        </div>
+      </section>
+
+      <!-- VICTORY OVERLAY -->
+      <div id="winOverlay" class="win-overlay hidden">
+        <div class="win-card glass-panel">
+          <div class="win-emoji">🏆</div>
+          <h2 class="win-title">Victory!</h2>
+          <p class="win-sub" id="winStats">Completed in record time!</p>
+          <p class="text-xs text-[rgba(235,235,245,0.40)] mt-2" id="newRecordText"></p>
+          <div class="flex gap-3 mt-6">
+            <button id="overlayPlayAgain" class="btn-primary flex-1 justify-center" type="button">Play Again 🔁</button>
+            <button onclick="winOverlay.classList.add('hidden')" class="btn-secondary flex-1 justify-center" type="button">Close</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ─── Footer ─── -->
+    <footer class="mt-auto border-t border-[rgba(255,255,255,0.08)]">
+      <div class="max-w-4xl mx-auto px-5 py-12">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
+          <div>
+            <p class="font-display font-medium text-lg mb-1 text-[#f2f2f7]">वसुधैव कुटुम्बકમ્</p>
+            <p class="text-sm italic text-[rgba(235,235,245,0.50)]">The world is one family</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="gujarati.js"></script>
+</body>
+</html>
