@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Tic Tac Toe — Gunjan's Game Room</title>
-
+  <title>Memory Match — Gunjan's Game Room</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
-
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="tictactoe.css" />
+  <link rel="stylesheet" href="memory.css" />
 </head>
-
-<body class="theme-ttt">
+<body class="theme-memory">
   <div class="layout-wrapper">
-
     <!-- ─── Header ─── -->
     <header class="fixed top-0 left-0 right-0 z-50 h-14 flex items-center">
       <div class="max-w-4xl mx-auto w-full px-5 flex items-center justify-between">
@@ -40,7 +35,7 @@
         </nav>
         <div class="flex items-center gap-2">
           <a href="https://github.com/gunjanpatel" target="_blank"
-            class="text-[rgba(235,235,245,0.50)] hover:text-[#a78bfa] transition-colors" title="GitHub">
+            class="text-[rgba(235,235,245,0.50)] hover:text-[#d946ef] transition-colors" title="GitHub">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -50,123 +45,67 @@
       </div>
     </header>
 
-    <!-- ─── Main ─── -->
+    <!-- ─── Main Content ─── -->
     <main class="flex-1 pt-20 pb-12 px-5 flex flex-col items-center">
-
       <!-- SETUP SCREEN -->
       <section id="setupScreen" class="w-full max-w-md mt-8">
         <div class="glass-panel p-8">
           <div class="text-center mb-8">
-            <div class="text-5xl mb-3">⭕</div>
-            <h1 class="page-title">Tic Tac Toe</h1>
-            <p class="text-sm text-[rgba(235,235,245,0.50)] mt-1">Pick your colours, then battle!</p>
+            <div class="text-5xl mb-3">🧠</div>
+            <h1 class="page-title">Memory Match</h1>
+            <p class="text-sm text-[rgba(235,235,245,0.50)] mt-1">Train your brain. Match all card pairs!</p>
           </div>
-
-          <!-- Mode selector -->
-          <div class="mb-7">
-            <p class="label mb-2">Game mode</p>
-            <div class="mode-toggle">
-              <button class="mode-btn active" data-mode="2p" type="button">
-                <span class="text-lg">👥</span> 2 Players
-              </button>
-              <button class="mode-btn" data-mode="cpu" type="button">
-                <span class="text-lg">🤖</span> vs Computer
-              </button>
-            </div>
-          </div>
-
-          <!-- Player 1 -->
-          <div class="player-setup mb-5">
-            <p class="label mb-2">Player 1</p>
-            <input id="p1name" type="text" maxlength="16" placeholder="Yuval" value="Yuval" class="name-input mb-3" />
-            <div class="color-swatches" data-player="1"></div>
-          </div>
-
-          <!-- Player 2 / Computer -->
-          <div class="player-setup mb-5" id="p2setup">
-            <p class="label mb-2" id="p2label">Player 2</p>
-            <input id="p2nameInput" type="text" maxlength="16" placeholder="Goga" value="Goga" class="name-input mb-3" />
-            <div class="color-swatches" data-player="2"></div>
-          </div>
-
-          <!-- CPU Persona Selector -->
-          <div class="mb-8 hidden" id="cpuPersonaSetup">
-            <p class="label mb-2">Brain Trainer Persona</p>
-            <select id="cpuPersonaSelect" class="name-input">
-              <option value="trapper">The Trapper (Diagonal & Corner Specialist)</option>
-              <option value="wall">The Wall (Center Command & Block Master)</option>
-              <option value="chaos">Chaos Monkey (Unpredictable Playful Brain)</option>
-            </select>
-          </div>
-
           <button id="startBtn" class="btn-primary w-full justify-center text-base py-3" type="button">
-            Let's Play! 🎮
+            Start Game ⚡
           </button>
         </div>
       </section>
 
       <!-- GAME SCREEN -->
-      <section id="gameScreen" class="hidden w-full max-w-md mt-8">
-
-        <!-- Score bar -->
+      <section id="gameScreen" class="hidden w-full max-w-md mt-6">
+        <!-- Stats bar -->
         <div class="score-bar glass-panel px-6 py-4 mb-5 flex items-center justify-between">
-          <div class="score-player" id="score-p1">
-            <div class="score-dot" id="dot-p1">✕</div>
-            <span class="score-name" id="sname-p1">Player 1</span>
-            <span class="score-num" id="snum-p1">0</span>
+          <div>
+            <div class="text-xs text-[rgba(235,235,245,0.30)] uppercase tracking-widest font-mono">Flips</div>
+            <div class="score-num text-center" id="flipCount">0</div>
           </div>
-          <div class="text-center">
-            <div class="text-xs text-[rgba(235,235,245,0.30)] uppercase tracking-widest font-mono">draws</div>
-            <div class="score-num" id="snum-draw">0</div>
+          <div>
+            <div class="text-xs text-[rgba(235,235,245,0.30)] uppercase tracking-widest font-mono">Time</div>
+            <div class="score-num text-center" id="timer">0s</div>
           </div>
-          <div class="score-player score-player--right" id="score-p2">
-            <span class="score-num" id="snum-p2">0</span>
-            <span class="score-name" id="sname-p2">Player 2</span>
-            <div class="score-dot" id="dot-p2">◯</div>
+          <div>
+            <div class="text-xs text-[rgba(235,235,245,0.30)] uppercase tracking-widest font-mono">Best Time</div>
+            <div class="score-num text-center" id="bestTime">--</div>
           </div>
         </div>
 
-        <!-- Turn indicator -->
-        <div class="turn-indicator mb-5" id="turnIndicator">
-          <div class="turn-dot" id="turnDot"></div>
-          <span id="turnText">Player 1's turn</span>
-        </div>
-
-        <!-- Board -->
-        <div class="board-wrap glass-panel p-5 mb-5">
-          <div class="board" id="board">
-            <button class="cell" data-idx="0" type="button"></button>
-            <button class="cell" data-idx="1" type="button"></button>
-            <button class="cell" data-idx="2" type="button"></button>
-            <button class="cell" data-idx="3" type="button"></button>
-            <button class="cell" data-idx="4" type="button"></button>
-            <button class="cell" data-idx="5" type="button"></button>
-            <button class="cell" data-idx="6" type="button"></button>
-            <button class="cell" data-idx="7" type="button"></button>
-            <button class="cell" data-idx="8" type="button"></button>
+        <!-- Card Grid -->
+        <div class="board-wrap glass-panel p-4 mb-5">
+          <div class="grid grid-cols-4 gap-3 aspect-square w-full" id="cardGrid">
+            <!-- Dynamically populated card blocks -->
           </div>
         </div>
 
-        <!-- Action buttons -->
+        <!-- Restart Button -->
         <div class="flex gap-3">
-          <button id="rematchBtn" class="btn-primary flex-1 justify-center" type="button">Rematch 🔁</button>
-          <button id="newGameBtn" class="btn-secondary flex-1 justify-center" type="button">Change Settings</button>
+          <button id="restartBtn" class="btn-primary flex-1 justify-center" type="button">Restart 🔁</button>
+          <button id="homeBtn" class="btn-secondary flex-1 justify-center" type="button">Main Menu</button>
         </div>
       </section>
 
-      <!-- WIN OVERLAY -->
+      <!-- VICTORY OVERLAY -->
       <div id="winOverlay" class="win-overlay hidden">
         <div class="win-card glass-panel">
-          <div class="win-emoji" id="winEmoji">🎉</div>
-          <h2 class="win-title" id="winTitle">Red Wins!</h2>
-          <p class="win-sub" id="winSub">Well played!</p>
+          <div class="win-emoji">🏆</div>
+          <h2 class="win-title">Victory!</h2>
+          <p class="win-sub" id="winStats">Matched in 24 flips and 18 seconds!</p>
+          <p class="text-xs text-[rgba(235,235,245,0.40)] mt-2" id="newRecordText"></p>
           <div class="flex gap-3 mt-6">
-            <button id="overlayRematch" class="btn-primary flex-1 justify-center" type="button">Rematch 🔁</button>
-            <button id="overlayNewGame" class="btn-secondary flex-1 justify-center" type="button">Change Settings</button>
+            <button id="overlayRestart" class="btn-primary flex-1 justify-center" type="button">Play Again 🔁</button>
+            <button id="overlayHome" class="btn-secondary flex-1 justify-center" type="button">Back to Hub</button>
           </div>
         </div>
       </div>
-
     </main>
 
     <!-- ─── Footer ─── -->
@@ -179,7 +118,7 @@
           </div>
           <div class="flex items-center gap-6">
             <a href="https://www.linkedin.com/in/jgunjanpatel/" target="_blank" rel="noopener noreferrer"
-              class="text-sm font-medium flex items-center gap-1.5 transition-colors text-[rgba(235,235,245,0.50)] hover:text-[#a78bfa]">
+              class="text-sm font-medium flex items-center gap-1.5 transition-colors text-[rgba(235,235,245,0.50)] hover:text-[#d946ef]">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                 <rect x="2" y="9" width="4" height="12"></rect>
@@ -188,7 +127,7 @@
               LinkedIn
             </a>
             <a href="https://github.com/gunjanpatel" target="_blank" rel="noopener noreferrer"
-              class="text-sm font-medium flex items-center gap-1.5 transition-colors text-[rgba(235,235,245,0.50)] hover:text-[#a78bfa]">
+              class="text-sm font-medium flex items-center gap-1.5 transition-colors text-[rgba(235,235,245,0.50)] hover:text-[#d946ef]">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
               </svg>
@@ -202,8 +141,6 @@
       </div>
     </footer>
   </div>
-
-  <script src="tictactoe.js"></script>
+  <script src="memory.js"></script>
 </body>
-
 </html>
