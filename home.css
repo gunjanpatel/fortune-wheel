@@ -54,6 +54,12 @@ body.theme-fortune {
   --brand-soft: rgba(251, 191, 36, 0.15);
 }
 
+body.theme-memory {
+  --brand: #d946ef;
+  --brand-hover: #f472b6;
+  --brand-soft: rgba(217, 70, 239, 0.15);
+}
+
 html {
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -268,6 +274,14 @@ a.game-card:hover .game-card__glow { opacity: 1; }
   background: radial-gradient(ellipse at top left, rgba(34, 211, 238, 0.12) 0%, transparent 70%);
 }
 .game-card--ttt .game-card__arrow { color: #22d3ee; }
+
+/* Memory card — electric neon-purple glow */
+.game-card--memory { border-color: rgba(217, 70, 239, 0.25); }
+.game-card--memory:hover { border-color: rgba(217, 70, 239, 0.55); }
+.game-card--memory .game-card__glow {
+  background: radial-gradient(ellipse at top left, rgba(217, 70, 239, 0.12) 0%, transparent 70%);
+}
+.game-card--memory .game-card__arrow { color: #d946ef; }
 
 /* Soon card */
 .game-card--soon {

@@ -312,17 +312,17 @@ function endGame(result) {
     let pitch = 1.0;
 
     if (movesElapsed <= 6) {
-      speechText = `Absolute domination! ${winnerName} crushed the competition in a lightning fast ${movesElapsed} moves! Outstanding performance!`;
-      rate = 1.25;
-      pitch = 1.35;
-    } else if (movesElapsed >= 8) {
-      speechText = `A monumental triumph! After a grueling battle of ${movesElapsed} moves, ${winnerName} emerges victorious from the ashes! What a spectacular showdown!`;
-      rate = 0.85;
-      pitch = 0.9;
-    } else {
-      speechText = `${winnerName} takes the victory in ${movesElapsed} moves! Well played.`;
+      speechText = `Amazing strategic foresight! ${winnerName} solved the pattern and won in only ${movesElapsed} steps! Your brain is planning ahead beautifully!`;
       rate = 1.0;
-      pitch = 1.1;
+      pitch = 1.0;
+    } else if (movesElapsed >= 8) {
+      speechText = `Incredible supercharged brain power! After a grueling struggle of ${movesElapsed} moves, ${winnerName} unlocked the ultimate winning formula! What a fantastic display of persistence and concentration!`;
+      rate = 1.0;
+      pitch = 1.0;
+    } else {
+      speechText = `Great job, ${winnerName}! You completed the board in ${movesElapsed} moves! Keep training that brain!`;
+      rate = 1.0;
+      pitch = 1.0;
     }
 
     speak(speechText, rate, pitch);
@@ -332,7 +332,7 @@ function endGame(result) {
     winEmoji.textContent = '🤝';
     winTitle.textContent = "It's a Draw!";
     winSub.textContent = 'Great game, both of you!';
-    speak("A hard-fought stalemate. Neither side could break the wall! It is a draw.", 0.95, 1.0);
+    speak("Perfect double-block strategy! It's a draw! Both players showed master-level defense! Fantastic brain building!", 0.95, 1.0);
   }
 
   setTimeout(() => winOverlay.classList.remove('hidden'), 600);
